@@ -1,0 +1,7 @@
+tabulator_workhours.hello:
+  path: '/workhours'
+  defaults:
+    _controller: '\Drupal\tabulator_workhours\Controller\TabulatorWorkhoursController::get_workhours_list'
+    _title: 'get_workhours_list'
+  requirements:
+    _permission: 'access content'

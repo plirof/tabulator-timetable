@@ -1,0 +1,15 @@
+app:
+  css:
+    component:
+      css/tabulator3.3.2.min.css: {}
+      css/jquery-ui.min.css: {}
+      css/tabulator/tabulator.css: {}
+      css/selectize/selectize.css: {}     
+  js:
+    js/app.js: {}
+    js/tabulator3.3.2.min.js: {}
+    js/selectize-standalone/selectize.min.js: {}    
+  dependencies:
+    - core/jquery
+    - core/jquery.ui
+    - core/jquery.ui.datepicker  

@@ -1,0 +1,61 @@
+<?php
+
+namespace Drupal\tabulator_workhours\Controller;
+
+use Drupal\Core\Controller\ControllerBase;
+
+class TabulatorWorkhoursController extends ControllerBase {
+
+  public function get_workhours_list() {
+    $element = array(
+
+    '#type' => 'inline_template',
+    '#template' => '
+          <table border=2><tr><td>
+    
+              <div id="msg">Loading... getting jDrupal username</div>
+    </td></tr><tr><td>
+              <button type="button" class="button preRenderButton" ><div id="download-csv">Download CSV</div></button></td><td>
+              <button type="button" ><div id="download-json">Download JSON</div></button></td><td>
+              <button type="button" ><div id="download-xlsx">Download xlsx</div></button></td><td>
+    
+              <button type="button" ><div id="refresh-data">Refresh data</div></button>
+    </td></tr><tr><td>
+    
+  <!--  
+    <select class="selectize" id="selectize" name="teachers">
+       <option value="AL">Alabama</option>
+       <option value="AB">BBBAlabama</option>
+       <option value="CC">catMinCat</option>
+      
+    </select>
+     -->
+    <div id="selectize">Loading...selectize</div><br>
+    
+    </td></tr><tr><td>
+              filter-afm<input type="text" id="#filter-afm" ></td><td>
+              filter-value-from<input type="text" id="#filter-value-from"></td><td>
+              filter-value-to<input type="text" id="#filter-value-to"></td><td>
+    
+    
+    </td></td>
+    
+    
+    </table>
+                  <BR>
+                  <div id="example-table">Loading... sample-tabulator table</div><br>
+                  
+              ',
+      //'#allowed_tags' => ['html'],          
+      '#attached' => array(
+        'library' => array(
+          'jdrupal/jdrupal',
+          'tabulator_workhours/app'
+        )
+      )
+    );
+    return $element;
+  }
+
+}
+?>

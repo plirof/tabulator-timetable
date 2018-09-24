@@ -1,0 +1,136 @@
+
+// Set the Drupal site path.
+jDrupal.config('sitePath', 'http://localhost/drupal8test');
+
+// Connect to Drupal and say hello to the current user.
+jDrupal.connect().then(function() {
+  var user = jDrupal.currentUser();
+  var msg = user.isAuthenticated() ?
+  'Hello user : ' + user.getAccountName() : 'Hello World - No User is connected';
+  document.getElementById('msg').innerHTML = msg;
+});
+
+
+
+jQuery(document).ready(function($) {
+
+
+  // Code that uses jQuery's $ can follow here.
+  $("#example-table").tabulator({
+  	ajaxURL:"http://localhost/drupal8test/view/local/didaskalia-workhours", //ajax URL
+    //ajaxParams:{key1:"value1", key2:"value2"}, //ajax parameters
+    ajaxConfig:"GET", //ajax HTTP request type
+    //ajax DOCS http://tabulator.info/docs/3.3#set-data
+    //ajaxFiltering:true, //send filter data to the server instead of processing locally  	
+    //ajaxSorting:true, //send sort data to the server instead of processing locally
+    height:"811px",
+    columns:[
+        //{title:"Name", field:"name"},
+        {title:"Κώδ. φροντ.", field:"parartima_id", headerFilter:true ,groupBy:"parartima_id"},
+        {title:"ΑΦΜ<BR>εκπαιδευτικού", field:"afm", headerFilter:true},
+        {title:"Επώνυμο<BR>εκπ/κού", field:"lastName", headerFilter:true},        
+        {title:"Όνομα<BR>εκπ/κού", field:"firstName"},                
+        {title:"Ειδικότητα<BR>εκπ/κού", field:"speciality_id", headerFilter:true},        
+        {title:"Ώρες διδασκαλίας<BR>συνολικού κύκλου μαθήματος<BR> εκπ/κού", field:"rrule_this_didaskalia_workhours", topCalc:"sum"},
+        {title:"Ώρες ατομικής <BR>διδ/λίας <BR>μαθ/τος <BR>εκπ/κού", field:"didaHours" },
+        {title:"Eπαναλήψεις<BR>διδ/λίας <BR>μαθ/τος <BR>εκπ/κού", field:"rrule_this_event_instances"},
+        {title:"Εναρξη<BR>dtstart", field:"dtstart"},
+        {title:"Λήξη<BR>until", field:"until"},
+
+    ],
+}); // END of $("#example-table").tabulator({
+
+//trigger download of data.csv file
+$("#download-csv").click(function(){
+    $("#example-table").tabulator("download", "csv", "data.csv");
+});
+
+//trigger download of data.json file
+$("#download-json").click(function(){
+    $("#example-table").tabulator("download", "json", "data.json");
+});
+
+//trigger download of data.xlsx file
+$("#download-xlsx").click(function(){
+    $("#example-table").tabulator("download", "xlsx", "data.xlsx");
+});
+
+//trigger refresh-data
+$("#refresh-data").click(function(){
+    $("#example-table").tabulator("setData");
+});
+
+
+//$("#example-table").tabulator("download", "csv", "data.csv"); //download table data as a CSV formatted file with a file name of data.csv  <-- this will directly download EMPTY http://tabulator.info/docs/3.3#download
+//trigger download of data.csv file
+
+//$("#example-table").tabulator("addFilter", "didaHours", ">", 1);
+
+/*
+//Custom filter example
+function customFilter(data){
+    return data.car && data.rating < 3;
+}
+
+//Trigger setFilter function with correct parameters
+function updateFilter(){
+
+    var filter = $("#filter-field").val() == "function" ? customFilter : $("#filter-field").val();
+
+    if($("#filter-field").val() == "function" ){
+        $("#filter-type").prop("disabled", true);
+        $("#filter-value").prop("disabled", true);
+    }else{
+        $("#filter-type").prop("disabled", false);
+        $("#filter-value").prop("disabled", false);
+    }
+
+    $("#example-table").tabulator("setFilter", filter, $("#filter-type").val(), $("#filter-value").val());
+}
+
+//Update filters on value change
+$("#filter-field, #filter-type").change(updateFilter);
+$("#filter-value").keyup(updateFilter);
+
+//Clear filters on "Clear Filters" button click
+$("#filter-clear").click(function(){
+    $("#filter-field").val("");
+    $("#filter-type").val("=");
+    $("#filter-value").val("");
+
+    $("#example-table").tabulator("clearFilter");
+});
+
+*/
+
+
+
+}); // END of jQuery(document).ready(function($) {
+
+
+/*
+//OK this works : 
+jQuery(document).ready(function($) {
+  // Code that uses jQuery's $ can follow here.
+  $("#example-table").tabulator({
+    ajaxURL:"http://localhost/drupal8test/view/local/didaskalia-workhours", //ajax URL
+    //ajaxParams:{key1:"value1", key2:"value2"}, //ajax parameters
+    ajaxConfig:"GET", //ajax HTTP request type    
+    height:"311px",
+    columns:[
+        //{title:"Name", field:"name"},
+        {title:"Κώδ. φροντ.", field:"parartima_id", headerFilter:true},
+        {title:"ΑΦΜ<BR>εκπαιδευτικού", field:"afm", headerFilter:true},
+        {title:"Επώνυμο<BR>εκπ/κού", field:"lastName", headerFilter:true},        
+        {title:"Όνομα<BR>εκπ/κού", field:"firstName"},                
+        {title:"Ειδικότητα<BR>εκπ/κού", field:"speciality_id", headerFilter:true},        
+        {title:"Ώρες διδασκαλίας<BR>συνολικού κύκλου μαθήματος<BR> εκπ/κού", field:"rrule_this_didaskalia_workhours", topCalc:"sum"},
+        {title:"Ώρες ατομικής <BR>διδ/λίας <BR>μαθ/τος <BR>εκπ/κού", field:"didaHours"},
+        {title:"Eπαναλήψεις<BR>διδ/λίας <BR>μαθ/τος <BR>εκπ/κού", field:"rrule_this_event_instances"},
+        {title:"Εναρξη<BR>dtstart", field:"dtstart"},
+        {title:"Λήξη<BR>until", field:"until"},
+
+    ],
+}); // END of $("#example-table").tabulator({
+}); // END of jQuery(document).ready(function($) {
+*/

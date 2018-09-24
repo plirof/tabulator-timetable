@@ -1,0 +1,8 @@
+name: tabulator_workhours jdrupal - tabulator
+type: module
+description: tabulator_workhours My awesome Drupal 8 module.
+core: 8.x
+package: Other
+dependencies:
+  - jdrupal
+  - views_additions_efront

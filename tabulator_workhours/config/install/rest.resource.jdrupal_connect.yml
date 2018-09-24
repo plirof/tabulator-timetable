@@ -1,0 +1,24 @@
+uuid: 7ea21a1b-26c5-41eb-907c-81c4f474dbf4
+langcode: en
+status: true
+dependencies:
+  module:
+    - basic_auth
+    - hal
+    - jdrupal
+    - serialization
+    - simple_oauth
+    - user
+id: jdrupal_connect
+plugin_id: jdrupal_connect
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - hal_json
+    - json
+  authentication:
+    - basic_auth
+    - oauth2
+    - cookie

@@ -1,0 +1,68 @@
+/*
+// Set the Drupal site path.
+jDrupal.config('sitePath', 'http://localhost/drupal8test');
+
+// Connect to Drupal and say hello to the current user.
+jDrupal.connect().then(function() {
+  var user = jDrupal.currentUser();
+  var msg = user.isAuthenticated() ?
+  'Hello ' + user.getAccountName() : 'Hello World';
+  document.getElementById('msg').innerHTML = msg;
+});
+
+*/
+
+jQuery(document).ready(function($) {
+  // Code that uses jQuery's $ can follow here.
+  $("#example-table").tabulator({
+  	ajaxURL:"http://localhost/drupal8test/view/local/didaskalia-workhours", //ajax URL
+    //ajaxParams:{key1:"value1", key2:"value2"}, //ajax parameters
+    ajaxConfig:"GET", //ajax HTTP request type  	
+    height:"311px",
+    columns:[
+        //{title:"Name", field:"name"},
+        {title:"Κώδ. φροντ.", field:"parartima_id", headerFilter:true},
+        {title:"ΑΦΜ<BR>εκπαιδευτικού", field:"afm", headerFilter:true},
+        {title:"Επώνυμο<BR>εκπ/κού", field:"lastName", headerFilter:true},        
+        {title:"Όνομα<BR>εκπ/κού", field:"firstName"},                
+        {title:"Ειδικότητα<BR>εκπ/κού", field:"speciality_id", headerFilter:true},        
+        {title:"Ώρες διδασκαλίας<BR>συνολικού κύκλου μαθήματος<BR> εκπ/κού", field:"rrule_this_didaskalia_workhours", topCalc:"sum"},
+        {title:"Ώρες ατομικής <BR>διδ/λίας <BR>μαθ/τος <BR>εκπ/κού", field:"didaHours"},
+        {title:"Eπαναλήψεις<BR>διδ/λίας <BR>μαθ/τος <BR>εκπ/κού", field:"rrule_this_event_instances"},
+        {title:"Εναρξη<BR>dtstart", field:"dtstart"},
+        {title:"Λήξη<BR>until", field:"until"},
+
+    ],
+});
+});
+
+
+/*
+
+jQuery(document).ready(function($) {
+  // Code that uses jQuery's $ can follow here.
+  $("#example-table").tabulator({
+    height:"311px",
+    columns:[
+        {title:"Name", field:"name"},
+        {title:"Progress", field:"progress", sorter:"number"},
+        {title:"Gender", field:"gender"},
+        {title:"Rating", field:"rating"},
+        {title:"Favourite Color", field:"col"},
+        {title:"Date Of Birth", field:"dob", align:"center"},
+    ],
+});
+});
+
+$("#example-table").tabulator({
+    height:"311px",
+    columns:[
+        {title:"Name", field:"name"},
+        {title:"Progress", field:"progress", sorter:"number"},
+        {title:"Gender", field:"gender"},
+        {title:"Rating", field:"rating"},
+        {title:"Favourite Color", field:"col"},
+        {title:"Date Of Birth", field:"dob", align:"center"},
+    ],
+});
+*/
