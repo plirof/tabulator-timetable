@@ -9,7 +9,7 @@
 
 </head>
 <body>
-
+<button id="add-row">add-row</button>
 <div id="example-table"></div>
 <script>
 //$("#example-table").tabulator();
@@ -19,6 +19,7 @@
 var table = new Tabulator("#example-table", {
     height:"311px",
     layout:"fitColumns",
+    movableRows:true,
     columns:[
         {title:"Name", field:"name", width:150, editor:"input", validator:"required"},
         {title:"Progress", field:"progress", sorter:"number", align:"left", editor:"input", editor:true,  validator:["min:0", "max:100", "numeric"]},
@@ -33,6 +34,38 @@ var table = new Tabulator("#example-table", {
 
         //take action on validation fail
     },
+    rowMoved:function(row){
+        alert("Row: " + row.getData().name + " has been moved");
+    },
+    rowClick:function(e, row){
+        alert("Row " + row.getIndex() + " Clicked!!!!")
+    },
+    rowContext:function(e, row){
+        alert("Row " + row.getIndex() + " Context Clicked!!!!")
+    },    
+
+});
+
+
+
+//Add row on "Add Row" button click
+$("#add-row").click(function(){
+    table.addRow({});
+});
+
+//Delete row on "Delete Row" button click
+$("#del-row").click(function(){
+    table.deleteRow(1);
+});
+
+//Clear table on "Empty the table" button click
+$("#clear").click(function(){
+    table.clearData()
+});
+
+//Reset table contents on "Reset the table" button click
+$("#reset").click(function(){
+    table.setData(tabledata);
 });
 
 </script>
