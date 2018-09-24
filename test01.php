@@ -9,14 +9,14 @@
 
 </head>
 <body>
-ΚΑΘΗΓΗΤΕΣ: <textarea cols=50 rows=10 ></textarea>
+ΚΑΘΗΓΗΤΕΣ: <textarea id="teacherslist" cols=50 rows=10 ></textarea>
 <button id="add-row">add-row</button>
 <button id="download-json">download-json</button>
 
 <div id="example-table"></div>
 <script>
 //$("#example-table").tabulator();
-
+var arrayOfTeachers = $('#teacherslist').val().split('\n');
 //var table = new Tabulator("#example-table", {});
 
 //create autocomplete editor (example of using jquery code to create an editor)
