@@ -1,3 +1,11 @@
+<?php
+    $options["ΠΛΗΡ"]="ΠΛΗΡ";
+    $options["Α"]="Α";
+    $options["Β1"]="Β1";
+    $options["Γ1"]="Γ1";
+    $options["Δ1"]="Δ1";
+    print_r($options);
+?>
 <html>
 <head>
 <script type="text/javascript" src="js/jquery1.12.4.js"></script>
@@ -69,6 +77,40 @@ var autocompEditor = function(cell, onRendered, success, cancel){
 };  // end of editor
 
 
+var cellEditSelectTeacherFunction=function(cell){
+
+    //create a options list of all names currently in the table
+    var arrayOfTeachers = $('#teacherslist').val().split('\n');
+
+    var arrayOfTeachers2 = {};
+
+    arrayOfTeachers.forEach(function(row){
+        var data = row;
+        //alert(data);
+        arrayOfTeachers2[data] = data;
+    });
+    return arrayOfTeachers2;
+    
+
+    //var rows = $("example-table").tabulator("getRows");
+    var options = {};
+    options["ΠΛΗΡ"]="ΠΛΗΡΟΦΟΡΙΚΗ";
+    options["Α"]="Α";
+    options["Β1"]="Β1";
+    options["Γ1"]="Γ1";
+    options["Δ1"]="Δ1";
+    options["ΜΟΥΣ"]="ΜΟΥΣΙΚΗ";
+
+    /*
+    rows.forEach(function(row){
+        var data = row.getData();
+
+        options[data.name] = data.name;
+    });
+    */
+    return options;
+}; // end of var cellEditSelectTeacherFunction
+
 var tableData = [
     {id:1, name:"Β1", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1},
     {id:2, name:"Α", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
@@ -80,13 +122,8 @@ var table = new Tabulator("#example-table", {
     //layout:"fitColumns",
     //movableRows:true,
         columns:[
-        {title:"Name", field:"name", editor:"select", editorParams:{
-            "ΠΛΗΡ":"ΠΛΗΡ",
-            "Α":"Α",
-            "Β1":"Β1",
-            "Γ1":"Γ1",
-            "Δ1":"Δ1",
-            }
+        {title:"Name", field:"name", editor:"select", editorParams:cellEditSelectTeacherFunction
+        /*{"ΠΛΗΡ":"ΠΛΗΡ", "Α":"Α", "Β1":"Β1", "Γ1":"Γ1","Δ1":"Δ1",  }        */    
         },
         {title:"Age", field:"age", editor:true},
         {title:"Gender", field:"gender", editor:true /*, validator:["required", "in:male|female"]*/},
@@ -109,7 +146,7 @@ var table = new Tabulator("#example-table", {
         alert("Row: " + row.getData().name + " has been moved");
     },
     rowClick:function(e, row){
-        alert("Row " + row.getIndex() + " Clicked!!!!")
+       // alert("Row " + row.getIndex() + " Clicked!!!!")
     },
     rowContext:function(e, row){
         alert("Row " + row.getIndex() + " Context Clicked!!!!")
