@@ -9,6 +9,7 @@
 
 </head>
 <body>
+ΚΑΘΗΓΗΤΕΣ: <textarea cols=50 rows=10 ></textarea>
 <button id="add-row">add-row</button>
 <div id="example-table"></div>
 <script>
@@ -16,17 +17,74 @@
 
 //var table = new Tabulator("#example-table", {});
 
+//create autocomplete editor (example of using jquery code to create an editor)
+var autocompEditor = function(cell, onRendered, success, cancel){
+    //create and style input
+    var input = $("<input type='text'/>");
+
+    //setup jquery autocomplete
+    input.autocomplete({
+        source: ["United Kingdom", "Germany", "France", "USA", "Canada", "Russia", "India", "China", "South Korea", "Japan"]
+    });
+
+    input.css({
+        "padding":"4px",
+        "width":"100%",
+        "box-sizing":"border-box",
+    })
+    .val(cell.getValue());
+
+    onRendered(function(){
+        input.focus();
+        input.css("height","100%");
+    });
+
+    //submit new value on blur
+    input.on("change blur", function(e){
+        if(input.val() != cell.getValue()){
+            success(input.val());
+        }else{
+            cancel();
+        }
+    });
+
+    //submit new value on enter
+    input.on("keydown", function(e){
+        if(e.keyCode == 13){
+            success(input.val());
+        }
+
+        if(e.keyCode == 27){
+            cancel();
+        }
+    });
+
+    return input[0];
+};
+
+
+var tableData = [
+    {id:1, name:"Billy Bob", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1},
+    {id:2, name:"Mary May", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
+]
+
 var table = new Tabulator("#example-table", {
+	data:tableData, //set initial table data
     height:"311px",
-    layout:"fitColumns",
+    //layout:"fitColumns",
     movableRows:true,
-    columns:[
-        {title:"Name", field:"name", width:150, editor:"input", validator:"required"},
-        {title:"Progress", field:"progress", sorter:"number", align:"left", editor:"input", editor:true,  validator:["min:0", "max:100", "numeric"]},
-        {title:"Gender", field:"gender", editor:"input", validator:["required", "in:male|female"]},
-        {title:"Rating", field:"rating",  editor:"input", align:"center", width:100, editor:"input", validator:["min:0", "max:5", "integer"]},
-        {title:"Favourite Color", field:"col", editor:"input", validator:["minLength:3", "maxLength:10", "string"]},
+        columns:[
+        {title:"Name", field:"name", editor:true},
+        {title:"Age", field:"age", editor:true},
+        {title:"Gender", field:"gender", editor:true, validator:["required", "in:male|female"]},
+        {title:"Height", field:"height", editor:true},
+        {title:"Favourite Color", field:"col", editor:"input"},
+        {title:"Date Of Birth", field:"dob", editor:true},
+        {title:"Cheese Preference", field:"cheese", editor:autocompEditor, validator:"required"},
     ],
+
+
+
     validationFailed:function(cell, value, validators){
         //cell - cell component for the edited cell
         //value - the value that failed validation
