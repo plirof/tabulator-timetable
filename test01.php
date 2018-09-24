@@ -11,6 +11,8 @@
 <body>
 ΚΑΘΗΓΗΤΕΣ: <textarea cols=50 rows=10 ></textarea>
 <button id="add-row">add-row</button>
+<button id="download-json">download-json</button>
+
 <div id="example-table"></div>
 <script>
 //$("#example-table").tabulator();
@@ -104,7 +106,10 @@ var table = new Tabulator("#example-table", {
 
 });
 
-
+//trigger download of data.json file
+$("#download-json").click(function(){
+    table.download("json", "data.json");
+});
 
 //Add row on "Add Row" button click
 $("#add-row").click(function(){
