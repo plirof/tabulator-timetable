@@ -6,7 +6,6 @@
     $options["Γ1"]="Γ1";
     $options["Δ1"]="Δ1";
 
-    $tmimatalist_text="Α1,Α2,Β,Γ1,Γ2,Δ1,Δ2,Ε,ΣΤ1,ΣΤ2";
 ?>
 <html>
 <head>
@@ -118,12 +117,15 @@ var table = new Tabulator("#example-table", {
     //layout:"fitColumns",
     //movableRows:true,
         columns:[
-        {title:"ΩΡΑ", field:"time", editor:true},
-        <?php 
-        for($i=1;)
         {title:"Name", field:"name", editor:"select", editorParams:cellEditSelectTeacherFunction
+        /*{"ΠΛΗΡ":"ΠΛΗΡ", "Α":"Α", "Β1":"Β1", "Γ1":"Γ1","Δ1":"Δ1",  }        */    
         },
-        ?>     
+        {title:"Age", field:"age", editor:true},
+        {title:"Gender", field:"gender", editor:true /*, validator:["required", "in:male|female"]*/},
+        {title:"Height", field:"height", editor:true},
+        {title:"Favourite Color", field:"col", editor:"input"},
+        {title:"Date Of Birth", field:"dob", editor:true},
+        {title:"Cheese Preference", field:"cheese", editor:autocompEditor, validator:"required"},
     ],
 
 
