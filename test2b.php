@@ -13,8 +13,6 @@
 <head>
 <script type="text/javascript" src="js/jquery1.12.4.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>	
-<!--<script type="text/javascript" src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script> -->
-<script type="text/javascript" src="js/js-xlsx/xlsx.full.min.js"></script>
 <!-- <link href="css/tabulator3.3.2.min.css" rel="stylesheet"> -->
 <link href="css/tabulator.min.css" rel="stylesheet">
 <!-- <script type="text/javascript" src="js/tabulator3.3.2.min.js"></script> --> 
@@ -29,7 +27,7 @@
 ΚΑΘΗΓΗΤΕΣ: <textarea id="teacherslist" cols=50 rows=10 ><?php echo $teacherlist_text; ?></textarea>
 <button id="add-row">add-row</button>
 <button id="download-json">download-json</button>
-<button id="download-xlsx">download-xlsx</button>
+
 <div id="example-table"></div>
 <script>
 //$("#example-table").tabulator();
@@ -118,14 +116,12 @@ var tableData = [
 
     // day 1
     
-    $days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ"];
+    $days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ","test"];
     foreach($days_array as $this_day) {
-        /*
         echo '{id:'.$counter_row_whole_table.',time:"'.$this_day.'"},'; 
         $counter_row_whole_table++;
-        */
         for($daily_hour_counter=1;$daily_hour_counter<11;$daily_hour_counter++){
-            $timetable_row= '{id:'.$counter_row_whole_table.',day:"'.$this_day.'",time:"'.$daily_hour_counter.'",';    
+            $timetable_row= '{id:'.$counter_row_whole_table.',time:"'.$daily_hour_counter.'",';    
             $counter_tmima_col=0;
             foreach($tmimata_array as $tmima) {
                 $timetable_row.= 'tmimacode'.$counter_tmima_col.':"-",';
@@ -146,11 +142,9 @@ var table = new Tabulator("#example-table", {
 	data:tableData, //set initial table data
     //eight:"311px",
     //layout:"fitDataFill",
-    groupBy:"day",
     layout:"fitColumns",
     //movableRows:true,
         columns:[
-        {title:"ΗΜΕΡΑ", field:"day",headerSort:false,visible:false ,hideInHtml:false, editor:false},
         {title:"ΩΡΑ", field:"time",headerSort:false, editor:false},
 
 <?php                
@@ -195,22 +189,9 @@ var table = new Tabulator("#example-table", {
 
 //trigger download of data.json file
 $("#download-json").click(function(){
-    table.showColumn("day"); //show the "name" column
     table.download("json", "data.json");
-    table.hideColumn("day"); //show the "name" column
 });
 
-//$("#example-table").tabulator("download", "xlsx", "data.xlsx", {sheetName:"MyData"}); //download a Xlsx file that has a sheet name of "MyData"
-
-
-//trigger download of data.xlsx file
-$("#download-xlsx").click(function(){
-    table.showColumn("day"); //show the "name" column
-    table.download("xlsx", "school_program.xlsx", {sheetName:"My Data"});
-    table.hideColumn("day"); //show the "name" column
-});
-
-/*
 //Add row on "Add Row" button click
 $("#add-row").click(function(){
     table.addRow({});
@@ -230,7 +211,7 @@ $("#clear").click(function(){
 $("#reset").click(function(){
     table.setData(tabledata);
 });
-*/
+
 
 
 </script>
