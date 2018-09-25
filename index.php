@@ -7,6 +7,7 @@
     $options["Δ1"]="Δ1";
 
     $tmimatalist_text="Α1,Α2,Β,Γ1,Γ2,Δ1,Δ2,Ε,ΣΤ1,ΣΤ2";
+    $tmimata_array = explode(',',$tmimatalist_text);
 ?>
 <html>
 <head>
@@ -108,8 +109,24 @@ var cellEditSelectTeacherFunction=function(cell){
 }; // end of var cellEditSelectTeacherFunction
 
 var tableData = [
-    {id:1, name:"Β1", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1},
-    {id:2, name:"Α", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
+    //{id:1, name:"Β1", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1},
+    //{id:2, name:"Α", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
+    <?php
+        $counter_row_whole_table=1;
+        $count_day_hour=1; //max =9 or 10
+
+        $timetable_row= '{id:'.$counter_row_whole_table.',time:"'.$count_day_hour.'",';    
+        $counter_tmima_col=0;
+        foreach($tmimata_array as $tmima) {
+            $timetable_row.= 'tmimacode'.$counter_tmima_col.':"-",';
+            $counter_tmima_col++;
+        }
+        $count_day_hour++;
+        $counter_row_whole_table++;
+        $timetable_row.='},';
+        echo $timetable_row;
+    ?>
+
 ]
 
 var table = new Tabulator("#example-table", {
@@ -119,11 +136,19 @@ var table = new Tabulator("#example-table", {
     //movableRows:true,
         columns:[
         {title:"ΩΡΑ", field:"time", editor:true},
-        <?php 
-        for($i=1;)
-        {title:"Name", field:"name", editor:"select", editorParams:cellEditSelectTeacherFunction
-        },
-        ?>     
+
+<?php 
+            
+        
+        $counter_tmima_col=0;
+        foreach($tmimata_array as $tmima) {
+            echo '{title:"'.$tmima.'", field:"tmimacode'.$counter_tmima_col.'", editor:"select", editorParams:cellEditSelectTeacherFunction
+            },';
+            $counter_tmima_col++;
+        }
+        
+?> 
+           
     ],
 
 
