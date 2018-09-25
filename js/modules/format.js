@@ -1,8 +1,6 @@
-"use strict";
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-/* Tabulator v4.0.0 (c) Oliver Folkerd */
+/* Tabulator v4.0.1 (c) Oliver Folkerd */
 
 var Format = function Format(table) {
 	this.table = table; //hold Tabulator object
@@ -142,7 +140,7 @@ Format.prototype.formatters = {
 		}
 
 		number = precision !== false ? floatVal.toFixed(precision) : floatVal;
-		number = number.split(".");
+		number = String(number).split(".");
 
 		integer = number[0];
 		decimal = number.length > 1 ? decimalSym + number[1] : "";

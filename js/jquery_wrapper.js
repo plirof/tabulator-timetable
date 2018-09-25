@@ -1,6 +1,4 @@
-'use strict';
-
-/* Tabulator v4.0.0 (c) Oliver Folkerd */
+/* Tabulator v4.0.1 (c) Oliver Folkerd */
 
 /*
  * This file is part of the Tabulator package.

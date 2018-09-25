@@ -1,8 +1,6 @@
-"use strict";
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-/* Tabulator v4.0.0 (c) Oliver Folkerd */
+/* Tabulator v4.0.1 (c) Oliver Folkerd */
 
 var Edit = function Edit(table) {
 	this.table = table; //hold Tabulator object
@@ -743,7 +741,6 @@ Edit.prototype.editors = {
 		//set new value
 		function updateValue() {
 			var calcVal = percent * Math.round(bar.offsetWidth / (element.clientWidth / 100)) + min;
-			console.log("success", calcVal, percent, bar.offsetWidth, element.clientWidth, min);
 			success(calcVal);
 			element.setAttribute("aria-valuenow", calcVal);
 			element.setAttribute("aria-label", value);

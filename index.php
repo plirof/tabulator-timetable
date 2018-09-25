@@ -1,10 +1,11 @@
 <?php
+    $teacherlist_text= "Α1,24\nΑ2,11\nΠΛΗΡ,11\nΓΥΜΝ1,11\n";
     $options["ΠΛΗΡ"]="ΠΛΗΡ";
     $options["Α"]="Α";
     $options["Β1"]="Β1";
     $options["Γ1"]="Γ1";
     $options["Δ1"]="Δ1";
-    print_r($options);
+
 ?>
 <html>
 <head>
@@ -13,7 +14,7 @@
 <!-- <link href="css/tabulator3.3.2.min.css" rel="stylesheet"> -->
 <link href="css/tabulator.min.css" rel="stylesheet">
 <!-- <script type="text/javascript" src="js/tabulator3.3.2.min.js"></script> --> 
-<script type="text/javascript" src="js/tabulator4.min.js"></script>
+<script type="text/javascript" src="js/tabulator.min.js"></script>
 
         
 <script src="js/selectize-standalone/selectize.min.js"></script>
@@ -21,7 +22,7 @@
 
 </head>
 <body>
-ΚΑΘΗΓΗΤΕΣ: <textarea id="teacherslist" cols=50 rows=10 ></textarea>
+ΚΑΘΗΓΗΤΕΣ: <textarea id="teacherslist" cols=50 rows=10 ><?php echo $teacherlist_text; ?></textarea>
 <button id="add-row">add-row</button>
 <button id="download-json">download-json</button>
 
@@ -93,6 +94,7 @@ var cellEditSelectTeacherFunction=function(cell){
     
 
     //var rows = $("example-table").tabulator("getRows");
+    /*
     var options = {};
     options["ΠΛΗΡ"]="ΠΛΗΡΟΦΟΡΙΚΗ";
     options["Α"]="Α";
@@ -100,15 +102,8 @@ var cellEditSelectTeacherFunction=function(cell){
     options["Γ1"]="Γ1";
     options["Δ1"]="Δ1";
     options["ΜΟΥΣ"]="ΜΟΥΣΙΚΗ";
-
-    /*
-    rows.forEach(function(row){
-        var data = row.getData();
-
-        options[data.name] = data.name;
-    });
-    */
     return options;
+    */
 }; // end of var cellEditSelectTeacherFunction
 
 var tableData = [
@@ -269,4 +264,13 @@ $('#selectize').selectize({
 //#############selectize END
 
 </script>
+
+<?php
+    $options["ΠΛΗΡ"]="ΠΛΗΡ";
+    $options["Α"]="Α";
+    $options["Β1"]="Β1";
+    $options["Γ1"]="Γ1";
+    $options["Δ1"]="Δ1";
+    print_r($options);
+?>
 </body>
