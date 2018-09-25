@@ -1,5 +1,5 @@
 <?php
-print_r($_POST)    ;
+//print_r($_POST)    ;
 
 $posted_data=false; //if true we will fill all cells with ready data
 
@@ -35,11 +35,11 @@ $tmimata_array = explode(',',$tmimatalist_text);
 <script type="text/javascript" src="js/js-xlsx/xlsx.full.min.js"></script>
 <!-- <link href="css/tabulator3.3.2.min.css" rel="stylesheet"> -->
 <link href="css/tabulator.min.css" rel="stylesheet">
-<!-- <script type="text/javascript" src="js/tabulator3.3.2.min.js"></script> --> 
+<!--<script type="text/javascript" src="js/tabulator353/tabulator.min.js"></script>  -->
 <script type="text/javascript" src="js/tabulator.min.js"></script>
 
         
-<script src="js/selectize-standalone/selectize.min.js"></script>
+<!--<script src="js/selectize-standalone/selectize.min.js"></script> -->
 
 
 </head>
@@ -56,12 +56,22 @@ $tmimata_array = explode(',',$tmimatalist_text);
 
 <button id="download-json">download-json</button>
 <button id="download-xlsx">download-xlsx</button>
+<button id="import_json">import_json</button>
 <div id="example-table"></div>
 <script>
 //$("#example-table").tabulator();
 var arrayOfTeachers = $('#teacherslist').val().split('\n');
 //var table = new Tabulator("#example-table", {});
 
+var colorFormatter = function(cell, formatterParams){
+    var value = cell.getValue();
+    if(value  == "-"){
+       //cell.getElement().css("background-color","blue");
+       return value;
+    }else{
+        return value;
+    }
+};
 
 
 var cellEditSelectTeacherFunction=function(cell){
@@ -97,8 +107,6 @@ var tableData = [
     //{id:2, name:"Α", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
     <?php
     $counter_row_whole_table=1;
-
-
     // day 1
     $days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ"];
     foreach($days_array as $this_day) {
@@ -125,6 +133,7 @@ var tableData = [
 ]
 
 var table = new Tabulator("#example-table", {
+//$("#example-table").tabulator("#example-table", {    
 	data:tableData, //set initial table data
     //eight:"311px",
     //layout:"fitDataFill",
@@ -138,7 +147,7 @@ var table = new Tabulator("#example-table", {
 <?php                
         $counter_tmima_col=0;
         foreach($tmimata_array as $tmima) {
-            echo '{title:"'.$tmima.'", field:"tmimacode'.$counter_tmima_col.'",headerSort:false, editor:"select", editorParams:cellEditSelectTeacherFunction
+            echo '{title:"'.$tmima.'", field:"tmimacode'.$counter_tmima_col.'",headerSort:false, editor:"select",formatter:colorFormatter, editorParams:cellEditSelectTeacherFunction
             },';
             $counter_tmima_col++;
         }
@@ -150,19 +159,19 @@ var table = new Tabulator("#example-table", {
     rowFormatter:function(row){
         //row - row component
         var data = row.getData();
-
-        if(data.col == "ΔΕΥΤΕΡΑ" || data.col == "ΩΡΑ" ){
-            row.getElement().css({"background-color":"blue"});
+        console.log(data.tmimacode0);
+        if(data.tmimacode0 == "-" || data.col == "ΠΛΗΡ,11" ){
+           // alert(data.tmimacode0);
+            //row.getElement().style({"background-color":"blue"});
         }
     },
 
-    // INTERCEPT download
+    // INTERCEPT download maybe used to make a bigger JSON to contain more teachers& classes
     downloadReady:function(fileContents, blob){
         //fileContents - the unencoded contents of the file
         //blob - the blob object for the download
-        alert(blob);
+        //alert(blob);
         //custom action to send blob to server could be included here
-        blob=blob;
         return blob; //must return a blob to proceed with the download, return false to abort download
     },
 
@@ -265,7 +274,7 @@ $("#reset").click(function(){
 
 </script>
 ΕΙΣΑΓΩΓΗ ΔΕΔΟΜΕΝΩΝ ΠΡΟΓΡΑΜΜΑΤΟΣ που έχουν γίνει με το κουμπι εξαγωγή σε JSON (αντιγραψτε τα εδώ):<BR> <textarea id="programdata" name='timetable_program' cols=50 rows=10 ></textarea>
-<button id="import_json">import_json</button>
+<!-- <button id="import_json">import_json</button> BUTTON DOES NOT WORK HERE-->
 <?php
     $options["ΠΛΗΡ"]="ΠΛΗΡ";
     $options["Δ1"]="Δ1";
