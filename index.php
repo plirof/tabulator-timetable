@@ -116,7 +116,7 @@ var tableData = [
 
     // day 1
     
-    $days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ"];
+    $days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ","test"];
     foreach($days_array as $this_day) {
         echo '{id:'.$counter_row_whole_table.',time:"'.$this_day.'"},'; 
         $counter_row_whole_table++;
@@ -140,18 +140,17 @@ var tableData = [
 
 var table = new Tabulator("#example-table", {
 	data:tableData, //set initial table data
-    height:"311px",
-    //layout:"fitColumns",
+    //eight:"311px",
+    //layout:"fitDataFill",
+    layout:"fitColumns",
     //movableRows:true,
         columns:[
-        {title:"ΩΡΑ", field:"time", editor:true},
+        {title:"ΩΡΑ", field:"time",headerSort:false, editor:false},
 
-<?php 
-            
-        
+<?php                
         $counter_tmima_col=0;
         foreach($tmimata_array as $tmima) {
-            echo '{title:"'.$tmima.'", field:"tmimacode'.$counter_tmima_col.'", editor:"select", editorParams:cellEditSelectTeacherFunction
+            echo '{title:"'.$tmima.'", field:"tmimacode'.$counter_tmima_col.'",headerSort:false, editor:"select", editorParams:cellEditSelectTeacherFunction
             },';
             $counter_tmima_col++;
         }
@@ -160,7 +159,14 @@ var table = new Tabulator("#example-table", {
            
     ],
 
+    rowFormatter:function(row){
+        //row - row component
+        var data = row.getData();
 
+        if(data.col == "ΔΕΥΤΕΡΑ" || data.col == "ΩΡΑ" ){
+            row.getElement().css({"background-color":"blue"});
+        }
+    },
 
     validationFailed:function(cell, value, validators){
         //cell - cell component for the edited cell
@@ -207,93 +213,6 @@ $("#reset").click(function(){
 });
 
 
-//#############selectize start
-$('#selectize').selectize({
-    valueField: 'afm',
-    labelField: 'lastName',
-    searchField: 'lastName',
-    //create: false,
-    maxItems: 1 ,    
-    render: {
-        option: function(item, escape) {
-            return '<div>' +
-                '<span class="title">' +
-                    '<span class="surname"> ' + escape(item.lastName) + ' </span>' +
-                    '<span class="firstname">' + escape(item.firstName) + ' </span>' +
-                     '<span class="afm">ΑΦΜ : ' + escape(item.afm) + '</span>' +
-                '</span>' +
-            '</div>';
-        }
-    }, // ενδ οφ render: {
-    /*
-    score: function(search) {   //used to sort
-        var score = this.getScoreFunction(search);
-        return function(item) {
-            return score(item) * (1 + Math.min(item.watchers / 100, 1));
-        };
-    },
-    */
-// !!! BUG if I achange teacher it remains empty
-
-    onChange: function(value) {
-                    console.log("selectize onChange ok"+value);
-                    if(value.length<1 ) {
-                        console.log("selectize onChange ok - EMPTY Clearing afm=" +value);
-                        $("#example-table").tabulator("setData",tableEmptyData);
-                        //$("#example-table").tabulator("clearFilter");
-                    }
-                    else {
-                        //startDateHuman=$('#date_from').datepicker(datepicker( "option", "dateFormat", "@" )).val() ;// $( "#date_from" ).datepicker.parseDate( dateFormatHuman, this.value );
-                        console.log("selectize onChange ok - sending teacher_afm=" +value + "   , startDate="+startDate );
-                        //$("#example-table").tabulator("setData","http://localhost/drupal8test/view/local/didaskalia-workhours",{ teacher_afm:value },"GET"); //ORIG ok working
-                        //$("#example-table").tabulator("setData","http://localhost/drupal8test/view/local/didaskalia-workhours",[ {teacher_afm:value}, {search_end_date: endDate}, {search_begin_date: startDate} ],"GET");  //PROBLEM expecting array got Object
-                        $("#example-table").tabulator("setData","http://localhost/drupal8test/view/local/didaskalia-workhours",{search_enddate:endDate,search_begindate:startDate, teacher_afm:value},"GET"); //ΝΟΤΕ do NOT put underscores: eg start_date                       
-                        
-                        console.log("tabulator_get_filters:"+$("#example-table").tabulator("getFilters"));
-                        //$("#example-table").tabulator("clearFilter");
-                        //$("#example-table").tabulator("addFilter", "afm", "=", value);
-                    }
-    },
-/*
-    onItemAdd: function(value, $item) {
-                    $("#example-table").tabulator("setData","http://localhost/drupal8test/view/local/didaskalia-workhours");
-                    console.log("selectize onItemAdd ok");
-                    $("#example-table").tabulator("addFilter", "afm", "=", value);
-    },
-*/
-/*
-    onClear: function() {
-                    console.log("selectize onClear ok");
-                   // $("#example-table").tabulator("clearFilter");
-    },
-*/
-
-    load: function(query, callback) {
-        if (!query.length) return callback();
-
-        $.ajax({
-            url: 'http://localhost/drupal8test/view/local/teacher-list',// + encodeURIComponent(query),
-            type: 'GET',
-            dataType: 'json',
-            data: {
-                lastName: query,
-            },         
-            error: function() {
-                console.log("selectize error ok");
-                callback();
-            },
-            success: function(res) {
-                console.log("selectize success ok" + query);
-                //callback(res.repositories.slice(0, 10));
-                //console.log("res"+JSON.stringify(res));
-                //$("#example-table").tabulator("addFilter", "afm", "=", res.afm);
-                callback(res);
-            },
-        });
-    }
-});  // END of $('#selectize').selectize(
-
-//#############selectize END
 
 </script>
 
