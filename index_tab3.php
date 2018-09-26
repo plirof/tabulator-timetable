@@ -3,7 +3,7 @@
 
 $posted_data=false; //if true we will fill all cells with ready data
 
-$teacherlist_text= "Α1-ΔΑΣΚΑΛΟΣ,24\nΑ2-ΔΑΣΚΑΛΟΣ,11\nΠΛΗΡ,11\nΓΥΜΝ1,11\n";
+$teacherlist_text= "Α1-ΔΑΣΚΑΛΟΣ,24\nΑ2-ΔΑΣΚΑΛΟΣ,20\nΒ1-ΔΑΣΚΑΛΟΣ,20\nΒ2-ΔΑΣΚΑΛΟΣ,20\nΓ1-ΔΑΣΚΑΛΟΣ,20\nΓ2-ΔΑΣΚΑΛΟΣ,20\nΔ1-ΔΑΣΚΑΛΟΣ,20\nΔ2-ΔΑΣΚΑΛΟΣ,20\nΕ1-ΔΑΣΚΑΛΟΣ,20\nΕ2-ΔΑΣΚΑΛΟΣ,20\nΣΤ1-ΔΑΣΚΑΛΟΣ,20\nΣΤ2-ΔΑΣΚΑΛΟΣ,20\nΠΛΗΡ,11,cyan\nΓΥΜΝ1,11,yellow\nΑΓΓΛ,11,green\nΓΕΡΜ,4,grey\nΓΑΛ,4,pyrple\n";
 $tmimatalist_text="Α1,Α2,Β1,Β2,Γ1,Γ2,Δ1,Δ2,Ε1,Ε2,ΣΤ1,ΣΤ2";
   
 if(@($_POST['timetable_teacher'] )) {
@@ -66,7 +66,7 @@ var arrayOfTeachers = $('#teacherslist').val().split('\n');
 var colorFormatter = function(cell, formatterParams){
     var value = cell.getValue();
     if(value  == "-"){
-       cell.getElement().css("background-color","blue");
+       cell.getElement().css("background-color","lightgrey");
        return value;
     }else{
         return value;
@@ -103,8 +103,6 @@ var cellEditSelectTeacherFunction=function(cell){
 }; // end of var cellEditSelectTeacherFunction
 
 var tableData = [
-    //{id:1, name:"Β1", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1},
-    //{id:2, name:"Α", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
     <?php
     $counter_row_whole_table=1;
     // day 1
@@ -133,8 +131,8 @@ var tableData = [
 ]
 
 
-//var table = new Tabulator("#example-table", {
-$("#example-table").tabulator( {    
+//var table = new Tabulator("#example-table", { // tabulator v4
+$("#example-table").tabulator( {     //tabulator v3
 	data:tableData, //set initial table data
     //eight:"311px",
     //layout:"fitDataFill",
@@ -144,8 +142,7 @@ $("#example-table").tabulator( {
         columns:[
         {title:"ΗΜΕΡΑ", field:"day",headerSort:false,visible:false ,hideInHtml:false, editor:false},
         {title:"ΩΡΑ", field:"time",headerSort:false, editor:false},
-
-<?php                
+    <?php                
         $counter_tmima_col=0;
         foreach($tmimata_array as $tmima) {
             echo '{title:"'.$tmima.'", field:"tmimacode'.$counter_tmima_col.'",headerSort:false, editor:"select",formatter:colorFormatter, editorParams:cellEditSelectTeacherFunction
@@ -153,7 +150,7 @@ $("#example-table").tabulator( {
             $counter_tmima_col++;
         }
         
-?> 
+    ?> 
            
     ],
 
@@ -163,7 +160,7 @@ $("#example-table").tabulator( {
         console.log(data.tmimacode0);
         if(data.tmimacode0 == "-" || data.col == "ΠΛΗΡ,11" ){
            // alert(data.tmimacode0);
-            row.getElement().css({"background-color":"red"});
+            row.getElement().css({"background-color":"cyan"});
         }
     },
 

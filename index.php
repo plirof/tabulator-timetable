@@ -3,7 +3,7 @@
 
 $posted_data=false; //if true we will fill all cells with ready data
 
-$teacherlist_text= "Α1-ΔΑΣΚΑΛΟΣ,24\nΑ2-ΔΑΣΚΑΛΟΣ,11\nΠΛΗΡ,11\nΓΥΜΝ1,11\n";
+$teacherlist_text= "Α1-ΔΑΣΚΑΛΟΣ,24\nΑ2-ΔΑΣΚΑΛΟΣ,20\nΒ1-ΔΑΣΚΑΛΟΣ,20\nΒ2-ΔΑΣΚΑΛΟΣ,20\nΓ1-ΔΑΣΚΑΛΟΣ,20\nΓ2-ΔΑΣΚΑΛΟΣ,20\nΔ1-ΔΑΣΚΑΛΟΣ,20\nΔ2-ΔΑΣΚΑΛΟΣ,20\nΕ1-ΔΑΣΚΑΛΟΣ,20\nΕ2-ΔΑΣΚΑΛΟΣ,20\nΣΤ1-ΔΑΣΚΑΛΟΣ,20\nΣΤ2-ΔΑΣΚΑΛΟΣ,20\nΠΛΗΡ,11,cyan\nΓΥΜΝ1,11,yellow\nΑΓΓΛ,11,green\nΓΕΡΜ,4,grey\nΓΑΛ,4,pyrple\n";
 $tmimatalist_text="Α1,Α2,Β1,Β2,Γ1,Γ2,Δ1,Δ2,Ε1,Ε2,ΣΤ1,ΣΤ2";
   
 if(@($_POST['timetable_teacher'] )) {
@@ -147,7 +147,7 @@ var table = new Tabulator("#example-table", {
     rowFormatter:function(row){
         //row - row component
         var data = row.getData();
-        console.log(data.tmimacode0);
+        //console.log(data.tmimacode0);
         if(data.tmimacode0 == "-" || data.col == "ΠΛΗΡ,11" ){
            // alert(data.tmimacode0);
             //row.getElement().style({"background-color":"blue"});
