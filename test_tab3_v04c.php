@@ -33,10 +33,10 @@ $tmimata_array = explode(',',$tmimatalist_text);
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>	
 <!--<script type="text/javascript" src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script> -->
 <script type="text/javascript" src="js/js-xlsx/xlsx.full.min.js"></script>
-<!-- <link href="css/tabulator3.3.2.min.css" rel="stylesheet"> -->
-<link href="css/tabulator.min.css" rel="stylesheet">
-<!--<script type="text/javascript" src="js/tabulator353/tabulator.min.js"></script>  -->
-<script type="text/javascript" src="js/tabulator.min.js"></script>
+<link href="css/tabulator353/tabulator.min.css" rel="stylesheet">
+<!--<link href="css/tabulator.min.css" rel="stylesheet"> -->
+<script type="text/javascript" src="js/tabulator353/tabulator.min.js"></script>
+<!--<script type="text/javascript" src="js/tabulator.min.js"></script>-->
 
         
 <!--<script src="js/selectize-standalone/selectize.min.js"></script> -->
@@ -66,7 +66,7 @@ var arrayOfTeachers = $('#teacherslist').val().split('\n');
 var colorFormatter = function(cell, formatterParams){
     var value = cell.getValue();
     if(value  == "-"){
-       //cell.getElement().css("background-color","blue");
+       cell.getElement().css("background-color","blue");
        return value;
     }else{
         return value;
@@ -87,7 +87,19 @@ var cellEditSelectTeacherFunction=function(cell){
         arrayOfTeachers2[data] = data;
     });
     return arrayOfTeachers2;
+    
 
+    //var rows = $("example-table").tabulator("getRows");
+    /*
+    var options = {};
+    options["ΠΛΗΡ"]="ΠΛΗΡΟΦΟΡΙΚΗ";
+    options["Α"]="Α";
+    options["Β1"]="Β1";
+    options["Γ1"]="Γ1";
+    options["Δ1"]="Δ1";
+    options["ΜΟΥΣ"]="ΜΟΥΣΙΚΗ";
+    return options;
+    */
 }; // end of var cellEditSelectTeacherFunction
 
 var tableData = [
@@ -120,8 +132,9 @@ var tableData = [
 
 ]
 
-var table = new Tabulator("#example-table", {
-//$("#example-table").tabulator("#example-table", {    
+
+//var table = new Tabulator("#example-table", {
+$("#example-table").tabulator( {    
 	data:tableData, //set initial table data
     //eight:"311px",
     //layout:"fitDataFill",
@@ -150,7 +163,7 @@ var table = new Tabulator("#example-table", {
         console.log(data.tmimacode0);
         if(data.tmimacode0 == "-" || data.col == "ΠΛΗΡ,11" ){
            // alert(data.tmimacode0);
-            //row.getElement().style({"background-color":"blue"});
+            row.getElement().css({"background-color":"red"});
         }
     },
 
@@ -179,8 +192,7 @@ var table = new Tabulator("#example-table", {
     rowContext:function(e, row){
         alert("Row " + row.getIndex() + " Context Clicked!!!!")
     },    
-
-});
+}); // END Of tabulator Init
 
 //trigger download of data.json file
 $("#download-json").click(function(){

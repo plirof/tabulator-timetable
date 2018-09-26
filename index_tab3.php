@@ -196,9 +196,16 @@ $("#example-table").tabulator( {
 
 //trigger download of data.json file
 $("#download-json").click(function(){
+    /*
+    // +++++++++tab v4++++++++++++    
     table.showColumn("day"); //show the "name" column
     table.download("json", "data.json");
     table.hideColumn("day"); //show the "name" column
+    */
+    // +++++++++tab v3++++++++++++
+    $("#example-table").tabulator("showColumn","day");
+    $("#example-table").tabulator("download", "json", "backup_school_program.json");
+    $("#example-table").tabulator("hideColumn","day");
 });
 
 //$("#example-table").tabulator("download", "xlsx", "data.xlsx", {sheetName:"MyData"}); //download a Xlsx file that has a sheet name of "MyData"
@@ -206,9 +213,16 @@ $("#download-json").click(function(){
 
 //trigger download of data.xlsx file
 $("#download-xlsx").click(function(){
+    /*
+    // +++++++++tab v4++++++++++++
     table.showColumn("day"); //show the "name" column
     table.download("xlsx", "school_program.xlsx", {sheetName:"My Data"});
     table.hideColumn("day"); //show the "name" column
+    */
+    // +++++++++tab v3++++++++++++
+    $("#example-table").tabulator("showColumn","day");
+    $("#example-table").tabulator("download", "xlsx", "school_program.xlsx", {sheetName:"MyData"}); //download a Xlsx file that has a sheet name of "MyData"
+    $("#example-table").tabulator("hideColumn","day");
 });
 
 
@@ -249,7 +263,8 @@ var json_imported_data = [
 
 //Add row on "Add Row" button click
 $("#import_json").click(function(){
-    table.setData($('textarea#programdata').val());
+    //table.setData($('textarea#programdata').val()); //tabulator v4
+    $("#example-table").tabulator("setData",$('textarea#programdata').val()); //tabulator v3
 });
 
 /*
