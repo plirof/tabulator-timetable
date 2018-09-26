@@ -31,6 +31,7 @@ $tmimata_array = explode(',',$tmimatalist_text);
 <head>
 <script type="text/javascript" src="js/jquery1.12.4.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>	
+<script src="js/jquery.ui.touch-punch.min.js"></script>
 <!--<script type="text/javascript" src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script> -->
 <script type="text/javascript" src="js/js-xlsx/xlsx.full.min.js"></script>
 <link href="css/tabulator353/tabulator.min.css" rel="stylesheet">
