@@ -57,6 +57,7 @@ $tmimata_array = explode(',',$tmimatalist_text);
 <button id="download-json">download-json</button>
 <button id="download-xlsx">download-xlsx</button>
 <button id="import_json">import_json</button>
+<button id="auto_assign_first_teachers">auto_assign_main_teachers</button>
 <div id="example-table"></div>
 <script>
 //$("#example-table").tabulator();
@@ -157,7 +158,7 @@ $("#example-table").tabulator( {     //tabulator v3
     rowFormatter:function(row){
         //row - row component
         var data = row.getData();
-        console.log(data.tmimacode0);
+        //console.log(data.tmimacode0);
         if(data.tmimacode0 == "-" || data.col == "ΠΛΗΡ,11" ){
            // alert(data.tmimacode0);
             row.getElement().css({"background-color":"cyan"});
@@ -222,7 +223,52 @@ $("#download-xlsx").click(function(){
     $("#example-table").tabulator("hideColumn","day");
 });
 
+//trigger download of data.xlsx file
+$("#auto_assign_first_teachers").click(function(){
 
+    //var arrayOfTeachers = $('#teacherslist').val().split('\n');
+
+    var auto_assined_teacher_table=
+    [
+    <?php
+    // NOTE PHP will show STATIC results (if you change text area it won't be valid -SHOULD convert this to javascript)
+
+    $counter_row_whole_table=1;
+    $array_of_teachers_php=explode(PHP_EOL, $teacherlist_text);
+
+    // day 1
+    $days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ"];
+    foreach($days_array as $this_day) {
+        /*
+        echo '{id:'.$counter_row_whole_table.',time:"'.$this_day.'"},'; 
+        $counter_row_whole_table++;
+        */
+        for($daily_hour_counter=1;$daily_hour_counter<5;$daily_hour_counter++){
+            $timetable_row= '{id:'.$counter_row_whole_table.',day:"'.$this_day.'",time:"'.$daily_hour_counter.'",';    
+            $counter_tmima_col=0;
+            foreach($tmimata_array as $tmima) {
+                $timetable_row.= 'tmimacode'.$counter_tmima_col.':"'.$array_of_teachers_php[$counter_tmima_col].'",';
+                $counter_tmima_col++;
+            }
+           
+            $counter_row_whole_table++;
+            $timetable_row.='},';
+            echo $timetable_row;
+        } //end of for($daily_hour_counter=1
+         $counter_row_whole_table+=6;
+    }
+
+    ?>    ]    
+
+    ;
+
+
+    //console.log(auto_assined_teacher_table);
+    //var jsontext = '{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}';
+    //var auto_assined_teacher_table = JSON.parse(jsontext);
+    //$("#example-table").tabulator("updateOrAddData", [{id:1, name:"bob"}, {id:3, name:"steve"}]);
+    $("#example-table").tabulator("updateOrAddData",auto_assined_teacher_table); //tabulator v3
+});
 
 var json_imported_data = [ 
     {
