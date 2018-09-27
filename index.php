@@ -81,20 +81,35 @@ var countTeachersHours_json = function(){
 
     //table.setData($('textarea#programdata').val()); //tabulator v4
     var mytabledata_json =$("#example-table").tabulator("getData"); //tabulator v3
-    //console.log(mytabledata);
     var json=mytabledata_json;
     var obj = {};
 
+	//FIXED counter for up to 16 tmimata
 	for (var i = 0, j = json.length; i < j; i++) {
-	  if (obj[json[i].tmimacode0]) {
-	    obj[json[i].tmimacode0]++;
-	  }
-	  else {
-	    obj[json[i].tmimacode0] = 1;
-	  } 
+	  if (obj[json[i].tmimacode0]) {obj[json[i].tmimacode0]++;}else {obj[json[i].tmimacode0] = 1;}
+
+	  if (obj[json[i].tmimacode1]) {obj[json[i].tmimacode1]++;}else {obj[json[i].tmimacode1] = 1;}
+	  if (obj[json[i].tmimacode2]) {obj[json[i].tmimacode2]++;}else {obj[json[i].tmimacode2] = 1;}
+	  if (obj[json[i].tmimacode3]) {obj[json[i].tmimacode3]++;}else {obj[json[i].tmimacode3] = 1;}
+	  if (obj[json[i].tmimacode4]) {obj[json[i].tmimacode4]++;}else {obj[json[i].tmimacode4] = 1;}
+	  if (obj[json[i].tmimacode5]) {obj[json[i].tmimacode5]++;}else {obj[json[i].tmimacode5] = 1;}
+	  if (obj[json[i].tmimacode6]) {obj[json[i].tmimacode6]++;}else {obj[json[i].tmimacode6] = 1;}
+	  if (obj[json[i].tmimacode7]) {obj[json[i].tmimacode7]++;}else {obj[json[i].tmimacode7] = 1;}
+	  if (obj[json[i].tmimacode8]) {obj[json[i].tmimacode8]++;}else {obj[json[i].tmimacode8] = 1;}
+	  if (obj[json[i].tmimacode9]) {obj[json[i].tmimacode9]++;}else {obj[json[i].tmimacode9] = 1;}
+
+	  if (obj[json[i].tmimacode10]) {obj[json[i].tmimacode10]++;}else {obj[json[i].tmimacode10] = 1;}
+	  if (obj[json[i].tmimacode11]) {obj[json[i].tmimacode11]++;}else {obj[json[i].tmimacode11] = 1;}
+	  if (obj[json[i].tmimacode12]) {obj[json[i].tmimacode12]++;}else {obj[json[i].tmimacode12] = 1;}
+	  if (obj[json[i].tmimacode13]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode13] = 1;}
+	  if (obj[json[i].tmimacode14]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode14] = 1;}
+	  if (obj[json[i].tmimacode15]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode15] = 1;}	  	  	  
 	}
 
 	console.log(obj);
+    //console.log(Object.values(obj));
+    //console.log(Object.keys(obj));
+
 	return obj;
 };
 
@@ -341,51 +356,50 @@ $("#test-button").click(function(){
     //console.log(mytabledata);
     var json=mytabledata_json;
     var obj = {};
-    var tmimata_array = $('#tmimatalist').val().split(',')
+    //var tmimata_array = $('#tmimatalist').val().split(',')
     //var counter_tmima_col=0;
-    var arrayLength = tmimata_array.length;
-
+    //var arrayLength = tmimata_array.length;
+	//console.log(tmimata_array);
+	//FIXED counter for up to 16 tmimata
 	for (var i = 0, j = json.length; i < j; i++) {
-	  if (obj[json[i].tmimacode0]) {
-	    obj[json[i].tmimacode0]++;
-	  }
-	  else {
-	    obj[json[i].tmimacode0] = 1;
-	  }
+	  if (obj[json[i].tmimacode0]) {obj[json[i].tmimacode0]++;}else {obj[json[i].tmimacode0] = 1;}
 
-/*          // this evel() crashes PC ...
-            for(var i=0;i<arrayLength;i++) {
+	  if (obj[json[i].tmimacode1]) {obj[json[i].tmimacode1]++;}else {obj[json[i].tmimacode1] = 1;}
+	  if (obj[json[i].tmimacode2]) {obj[json[i].tmimacode2]++;}else {obj[json[i].tmimacode2] = 1;}
+	  if (obj[json[i].tmimacode3]) {obj[json[i].tmimacode3]++;}else {obj[json[i].tmimacode3] = 1;}
+	  if (obj[json[i].tmimacode4]) {obj[json[i].tmimacode4]++;}else {obj[json[i].tmimacode4] = 1;}
+	  if (obj[json[i].tmimacode5]) {obj[json[i].tmimacode5]++;}else {obj[json[i].tmimacode5] = 1;}
+	  if (obj[json[i].tmimacode6]) {obj[json[i].tmimacode6]++;}else {obj[json[i].tmimacode6] = 1;}
+	  if (obj[json[i].tmimacode7]) {obj[json[i].tmimacode7]++;}else {obj[json[i].tmimacode7] = 1;}
+	  if (obj[json[i].tmimacode8]) {obj[json[i].tmimacode8]++;}else {obj[json[i].tmimacode8] = 1;}
+	  if (obj[json[i].tmimacode9]) {obj[json[i].tmimacode9]++;}else {obj[json[i].tmimacode9] = 1;}
+
+	  if (obj[json[i].tmimacode10]) {obj[json[i].tmimacode10]++;}else {obj[json[i].tmimacode10] = 1;}
+	  if (obj[json[i].tmimacode11]) {obj[json[i].tmimacode11]++;}else {obj[json[i].tmimacode11] = 1;}
+	  if (obj[json[i].tmimacode12]) {obj[json[i].tmimacode12]++;}else {obj[json[i].tmimacode12] = 1;}
+	  if (obj[json[i].tmimacode13]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode13] = 1;}
+	  if (obj[json[i].tmimacode14]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode14] = 1;}
+	  if (obj[json[i].tmimacode15]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode15] = 1;}	  	  	  
+
+         /* // this evel() crashes PC ...
+			arrayLength=1;
+			var i=2;
+            //for(var i=0;i<arrayLength;i++) {
               if (eval(`obj[json[i].tmimacode${i}]`)) {
-                eval(`obj[json[i].tmimacode${i}]++`);
+                (eval(`obj[json[i].tmimacode${i}]`))++;
               }
               else {
-                eval(`obj[json[i].tmimacode${i}]`) = 1;
+                (eval(`obj[json[i].tmimacode${i}] `))= 1;
               }     
               //counter_tmima_col++
-            }
-*/
+            //}
+		*/
 
 	}
-
 
 	console.log(obj);
     //console.log(Object.values(obj));
     //console.log(Object.keys(obj));
-/*
-    var json=obj;
-    var obj = {};
-
-    for (var i = 0, j = json.length; i < j; i++) {
-      if (obj[json[i].tmimacode0]) {
-        obj[json[i].tmimacode0]++;
-      }
-      else {
-        obj[json[i].tmimacode0] = 1;
-      } 
-    }
-
-    console.log(obj);
-*/
 
 });
 
