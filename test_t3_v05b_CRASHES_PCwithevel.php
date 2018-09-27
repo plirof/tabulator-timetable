@@ -341,9 +341,6 @@ $("#test-button").click(function(){
     //console.log(mytabledata);
     var json=mytabledata_json;
     var obj = {};
-    var tmimata_array = $('#tmimatalist').val().split(',')
-    //var counter_tmima_col=0;
-    var arrayLength = tmimata_array.length;
 
 	for (var i = 0, j = json.length; i < j; i++) {
 	  if (obj[json[i].tmimacode0]) {
@@ -353,7 +350,9 @@ $("#test-button").click(function(){
 	    obj[json[i].tmimacode0] = 1;
 	  }
 
-/*          // this evel() crashes PC ...
+            var tmimata_array = $('#tmimatalist').val().split(',')
+            //var counter_tmima_col=0;
+            var arrayLength = tmimata_array.length;
             for(var i=0;i<arrayLength;i++) {
               if (eval(`obj[json[i].tmimacode${i}]`)) {
                 eval(`obj[json[i].tmimacode${i}]++`);
@@ -363,7 +362,7 @@ $("#test-button").click(function(){
               }     
               //counter_tmima_col++
             }
-*/
+
 
 	}
 
