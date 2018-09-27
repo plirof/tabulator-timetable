@@ -197,9 +197,9 @@ $("#example-table").tabulator( {     //tabulator v3
         //row - row component
         var data = row.getData();
         //console.log(data.tmimacode0);
-        if(data.tmimacode0 == "-" || data.col == "ΠΛΗΡ,11" ){
+        if(data.col == "ΠΛΗΡ,11" ){
            // alert(data.tmimacode0);
-            row.getElement().css({"background-color":"cyan"});
+            //row.getElement().css({"background-color":"cyan"});
         }
     },
 
@@ -381,7 +381,7 @@ $("#test-button").click(function(){
 	  if (obj[json[i].tmimacode14]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode14] = 1;}
 	  if (obj[json[i].tmimacode15]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode15] = 1;}	  	  	  
 
-         /* // this evel() crashes PC ...
+         /* // this eval() crashes PC ...
 			arrayLength=1;
 			var i=2;
             //for(var i=0;i<arrayLength;i++) {

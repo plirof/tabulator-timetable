@@ -42,3 +42,20 @@ ____________
 https://stackoverflow.com/questions/51220838/supplying-csv-file-input-to-ajax-url-to-display-on-html-table#
 
 __________________
+
+
+         /* // this eval() crashes PC ...
+			arrayLength=1;
+			var i=2;
+            //for(var i=0;i<arrayLength;i++) {
+              if (eval(`obj[json[i].tmimacode${i}]`)) {
+                (eval(`obj[json[i].tmimacode${i}]`))++;
+              }
+              else {
+                (eval(`obj[json[i].tmimacode${i}] `))= 1;
+              }     
+              //counter_tmima_col++
+            //}
+		*/
+
+__________________
