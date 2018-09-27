@@ -3,7 +3,7 @@
 
 $posted_data=false; //if true we will fill all cells with ready data
 
-$teacherlist_text= "Α1-ΔΑΣΚΑΛΟΣ,24\nΑ2-ΔΑΣΚΑΛΟΣ,20\nΒ1-ΔΑΣΚΑΛΟΣ,20\nΒ2-ΔΑΣΚΑΛΟΣ,20\nΓ1-ΔΑΣΚΑΛΟΣ,20\nΓ2-ΔΑΣΚΑΛΟΣ,20\nΔ1-ΔΑΣΚΑΛΟΣ,20\nΔ2-ΔΑΣΚΑΛΟΣ,20\nΕ1-ΔΑΣΚΑΛΟΣ,20\nΕ2-ΔΑΣΚΑΛΟΣ,20\nΣΤ1-ΔΑΣΚΑΛΟΣ,20\nΣΤ2-ΔΑΣΚΑΛΟΣ,20\nΠΛΗΡ,11,cyan\nΓΥΜΝ1,11,yellow\nΑΓΓΛ,11,green\nΓΕΡΜ,4,grey\nΓΑΛ,4,purple\n";
+$teacherlist_text= "Α1-ΔΑΣΚΑΛΟΣ,24\nΑ2-ΔΑΣΚΑΛΟΣ,20\nΒ1-ΔΑΣΚΑΛΟΣ,20\nΒ2-ΔΑΣΚΑΛΟΣ,20\nΓ1-ΔΑΣΚΑΛΟΣ,20\nΓ2-ΔΑΣΚΑΛΟΣ,20\nΔ1-ΔΑΣΚΑΛΟΣ,20\nΔ2-ΔΑΣΚΑΛΟΣ,20\nΕ1-ΔΑΣΚΑΛΟΣ,20\nΕ2-ΔΑΣΚΑΛΟΣ,20\nΣΤ1-ΔΑΣΚΑΛΟΣ,20\nΣΤ2-ΔΑΣΚΑΛΟΣ,20\nΠΛΗΡ,11,cyan\nΓΥΜΝ1,11,yellow\nΑΓΓΛ,11,green\nΓΕΡΜ,4,grey\nΓΑΛ,4,pyrple\n";
 $tmimatalist_text="Α1,Α2,Β1,Β2,Γ1,Γ2,Δ1,Δ2,Ε1,Ε2,ΣΤ1,ΣΤ2";
   
 if(@($_POST['timetable_teacher'] )) {
@@ -34,10 +34,10 @@ $tmimata_array = explode(',',$tmimatalist_text);
 <script src="js/jquery.ui.touch-punch.min.js"></script>
 <!--<script type="text/javascript" src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script> -->
 <script type="text/javascript" src="js/js-xlsx/xlsx.full.min.js"></script>
-<link href="css/tabulator353/tabulator.min.css" rel="stylesheet">
-<!--<link href="css/tabulator.min.css" rel="stylesheet"> -->
-<script type="text/javascript" src="js/tabulator353/tabulator.min.js"></script>
-<!--<script type="text/javascript" src="js/tabulator.min.js"></script>-->
+<!-- <link href="css/tabulator3.3.2.min.css" rel="stylesheet"> -->
+<link href="css/tabulator.min.css" rel="stylesheet">
+<!--<script type="text/javascript" src="js/tabulator353/tabulator.min.js"></script>  -->
+<script type="text/javascript" src="js/tabulator.min.js"></script>
 
         
 <!--<script src="js/selectize-standalone/selectize.min.js"></script> -->
@@ -58,45 +58,22 @@ $tmimata_array = explode(',',$tmimatalist_text);
 <button id="download-json">download-json</button>
 <button id="download-xlsx">download-xlsx</button>
 <button id="import_json">import_json</button>
-<button id="auto_assign_first_teachers">auto_assign_main_teachers</button>
-<button id="test-button">TEsT stuff button</button>
 <div id="example-table"></div>
 <script>
 //$("#example-table").tabulator();
 var arrayOfTeachers = $('#teacherslist').val().split('\n');
 //var table = new Tabulator("#example-table", {});
 
-//Note Formatter is only visual , MUTATOR is stored
 var colorFormatter = function(cell, formatterParams){
     var value = cell.getValue();
     if(value  == "-"){
-       cell.getElement().css("background-color","lightgrey");
+       //cell.getElement().css("background-color","blue");
        return value;
     }else{
         return value;
     }
 };
 
-var countTeachersHours_json = function(){
-
-    //table.setData($('textarea#programdata').val()); //tabulator v4
-    var mytabledata_json =$("#example-table").tabulator("getData"); //tabulator v3
-    //console.log(mytabledata);
-    var json=mytabledata_json;
-    var obj = {};
-
-	for (var i = 0, j = json.length; i < j; i++) {
-	  if (obj[json[i].tmimacode0]) {
-	    obj[json[i].tmimacode0]++;
-	  }
-	  else {
-	    obj[json[i].tmimacode0] = 1;
-	  } 
-	}
-
-	console.log(obj);
-	return obj;
-};
 
 var cellEditSelectTeacherFunction=function(cell){
 
@@ -111,22 +88,12 @@ var cellEditSelectTeacherFunction=function(cell){
         arrayOfTeachers2[data] = data;
     });
     return arrayOfTeachers2;
-    
 
-    //var rows = $("example-table").tabulator("getRows");
-    /*
-    var options = {};
-    options["ΠΛΗΡ"]="ΠΛΗΡΟΦΟΡΙΚΗ";
-    options["Α"]="Α";
-    options["Β1"]="Β1";
-    options["Γ1"]="Γ1";
-    options["Δ1"]="Δ1";
-    options["ΜΟΥΣ"]="ΜΟΥΣΙΚΗ";
-    return options;
-    */
 }; // end of var cellEditSelectTeacherFunction
 
 var tableData = [
+    //{id:1, name:"Β1", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1},
+    //{id:2, name:"Α", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
     <?php
     $counter_row_whole_table=1;
     // day 1
@@ -154,9 +121,8 @@ var tableData = [
 
 ]
 
-
-//var table = new Tabulator("#example-table", { // tabulator v4
-$("#example-table").tabulator( {     //tabulator v3
+var table = new Tabulator("#example-table", {
+//$("#example-table").tabulator("#example-table", {    
 	data:tableData, //set initial table data
     //eight:"311px",
     //layout:"fitDataFill",
@@ -166,7 +132,8 @@ $("#example-table").tabulator( {     //tabulator v3
         columns:[
         {title:"ΗΜΕΡΑ", field:"day",headerSort:false,visible:false ,hideInHtml:false, editor:false},
         {title:"ΩΡΑ", field:"time",headerSort:false, editor:false},
-    <?php                
+
+<?php                
         $counter_tmima_col=0;
         foreach($tmimata_array as $tmima) {
             echo '{title:"'.$tmima.'", field:"tmimacode'.$counter_tmima_col.'",headerSort:false, editor:"select",formatter:colorFormatter, editorParams:cellEditSelectTeacherFunction
@@ -174,7 +141,7 @@ $("#example-table").tabulator( {     //tabulator v3
             $counter_tmima_col++;
         }
         
-    ?> 
+?> 
            
     ],
 
@@ -184,7 +151,7 @@ $("#example-table").tabulator( {     //tabulator v3
         //console.log(data.tmimacode0);
         if(data.tmimacode0 == "-" || data.col == "ΠΛΗΡ,11" ){
            // alert(data.tmimacode0);
-            row.getElement().css({"background-color":"cyan"});
+            //row.getElement().style({"background-color":"blue"});
         }
     },
 
@@ -213,20 +180,14 @@ $("#example-table").tabulator( {     //tabulator v3
     rowContext:function(e, row){
         alert("Row " + row.getIndex() + " Context Clicked!!!!")
     },    
-}); // END Of tabulator Init
+
+});
 
 //trigger download of data.json file
 $("#download-json").click(function(){
-    /*
-    // +++++++++tab v4++++++++++++    
     table.showColumn("day"); //show the "name" column
     table.download("json", "data.json");
     table.hideColumn("day"); //show the "name" column
-    */
-    // +++++++++tab v3++++++++++++
-    $("#example-table").tabulator("showColumn","day");
-    $("#example-table").tabulator("download", "json", "backup_school_program.json");
-    $("#example-table").tabulator("hideColumn","day");
 });
 
 //$("#example-table").tabulator("download", "xlsx", "data.xlsx", {sheetName:"MyData"}); //download a Xlsx file that has a sheet name of "MyData"
@@ -234,64 +195,12 @@ $("#download-json").click(function(){
 
 //trigger download of data.xlsx file
 $("#download-xlsx").click(function(){
-    /*
-    // +++++++++tab v4++++++++++++
     table.showColumn("day"); //show the "name" column
     table.download("xlsx", "school_program.xlsx", {sheetName:"My Data"});
     table.hideColumn("day"); //show the "name" column
-    */
-    // +++++++++tab v3++++++++++++
-    $("#example-table").tabulator("showColumn","day");
-    $("#example-table").tabulator("download", "xlsx", "school_program.xlsx", {sheetName:"MyData"}); //download a Xlsx file that has a sheet name of "MyData"
-    $("#example-table").tabulator("hideColumn","day");
 });
 
-//trigger download of data.xlsx file
-$("#auto_assign_first_teachers").click(function(){
 
-    //var arrayOfTeachers = $('#teacherslist').val().split('\n');
-
-    var auto_assined_teacher_table=
-    [
-    <?php
-    // NOTE PHP will show STATIC results (if you change text area it won't be valid -SHOULD convert this to javascript)
-
-    $counter_row_whole_table=1;
-    $array_of_teachers_php=explode(PHP_EOL, $teacherlist_text);
-
-    // day 1
-    $days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ"];
-    foreach($days_array as $this_day) {
-        /*
-        echo '{id:'.$counter_row_whole_table.',time:"'.$this_day.'"},'; 
-        $counter_row_whole_table++;
-        */
-        for($daily_hour_counter=1;$daily_hour_counter<5;$daily_hour_counter++){
-            $timetable_row= '{id:'.$counter_row_whole_table.',day:"'.$this_day.'",time:"'.$daily_hour_counter.'",';    
-            $counter_tmima_col=0;
-            foreach($tmimata_array as $tmima) {
-                $timetable_row.= 'tmimacode'.$counter_tmima_col.':"'.$array_of_teachers_php[$counter_tmima_col].'",';
-                $counter_tmima_col++;
-            }
-           
-            $counter_row_whole_table++;
-            $timetable_row.='},';
-            echo $timetable_row;
-        } //end of for($daily_hour_counter=1
-         $counter_row_whole_table+=6;
-    }
-
-    ?>    ]    
-
-    ;
-
-
-    //console.log(auto_assined_teacher_table);
-    //var jsontext = '{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}';
-    //var auto_assined_teacher_table = JSON.parse(jsontext);
-    //$("#example-table").tabulator("updateOrAddData", [{id:1, name:"bob"}, {id:3, name:"steve"}]);
-    $("#example-table").tabulator("updateOrAddData",auto_assined_teacher_table); //tabulator v3
-});
 
 var json_imported_data = [ 
     {
@@ -329,31 +238,9 @@ var json_imported_data = [
 
 //Add row on "Add Row" button click
 $("#import_json").click(function(){
-    //table.setData($('textarea#programdata').val()); //tabulator v4
-    $("#example-table").tabulator("setData",$('textarea#programdata').val()); //tabulator v3
+    table.setData($('textarea#programdata').val());
 });
 
-
-//Test button 
-$("#test-button").click(function(){
-    //table.setData($('textarea#programdata').val()); //tabulator v4
-    var mytabledata_json =$("#example-table").tabulator("getData"); //tabulator v3
-    //console.log(mytabledata);
-    var json=mytabledata_json;
-    var obj = {};
-
-	for (var i = 0, j = json.length; i < j; i++) {
-	  if (obj[json[i].tmimacode0]) {
-	    obj[json[i].tmimacode0]++;
-	  }
-	  else {
-	    obj[json[i].tmimacode0] = 1;
-	  } 
-	}
-
-	console.log(obj);
-
-});
 /*
 
 
