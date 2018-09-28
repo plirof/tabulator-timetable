@@ -124,14 +124,13 @@ function auto_assined_teacher_table(){
     //var get_tmimata_textarea = $('#tmimatalist').val();
     var tmimata_array = $('#tmimatalist').val().split(',');
     var tmimata_arrayLength = tmimata_array.length;
-    console.log("tmimata length="+tmimata_arrayLength)
+    //console.log("tmimata length="+tmimata_arrayLength)
     // day 1
     var days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ"];
     var timetable_json="[";
     var timetable_row="";
 
     for( var i=1;i<=5;i++) { //Loop through 5 days of week
-    	console.log("LOOP"+i);
         /*
         echo '{id:'.$counter_row_whole_table.',time:"'.$this_day.'"},'; 
         $counter_row_whole_table++;
@@ -385,13 +384,12 @@ $("#btn-save-all-data").click(function () {
     var get_teachers_textarea = $('#teacherslist').val();
     var get_tmimata_textarea = $('#tmimatalist').val();
 
+  	//var create = document.getElementById('create'),
+    //textbox = document.getElementById('textbox');
 
-  var create = document.getElementById('create'),
-    textbox = document.getElementById('textbox');
-
-
+    var d = new Date();
     var link = document.createElement('a');
-    link.setAttribute('download', 'info.txt');
+    link.setAttribute('download', 'school_full_backup'+d.getTime()+'.txt');
     //link.href = makeTextFile(textbox.value);
     link.href = makeTextFile(get_teachers_textarea+'|||||'+get_tmimata_textarea+'|||||'+myJSON_mytabledata);
     document.body.appendChild(link);
