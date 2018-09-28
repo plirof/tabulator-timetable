@@ -114,51 +114,6 @@ var countTeachersHours_json = function(){
 	return obj;
 };
 
-function auto_assined_teacher_table(){
-    var counter_row_whole_table=1;
-    var counter_tmima_col=0;
-    //$array_of_teachers_php=explode(PHP_EOL, $teacherlist_text);
-
-    //var get_teachers_textarea = $('#teacherslist').val();
-    var arrayOfTeachers = $('#teacherslist').val().split('\n');
-    //var get_tmimata_textarea = $('#tmimatalist').val();
-    var tmimata_array = $('#tmimatalist').val().split(',');
-    var tmimata_arrayLength = tmimata_array.length;
-    console.log("tmimata length="+tmimata_arrayLength)
-    // day 1
-    var days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ"];
-    var timetable_json="[";
-    var timetable_row="";
-
-    for( var i=1;i<=5;i++) { //Loop through 5 days of week
-    	console.log("LOOP"+i);
-        /*
-        echo '{id:'.$counter_row_whole_table.',time:"'.$this_day.'"},'; 
-        $counter_row_whole_table++;
-        */
-        //put teachers to first 4 hours
-        for(var daily_hour_counter=1;daily_hour_counter<5;daily_hour_counter++){
-            timetable_row= '{"id":'+counter_row_whole_table+',"day":"'+days_array[i]+'","time":"'+daily_hour_counter+'",';    
-            counter_tmima_col=0;
-            //foreach(tmimata_array as $tmima) {
-            for( var j=0;j<tmimata_arrayLength;j++) {	
-                timetable_row+= '"tmimacode'+counter_tmima_col+'":"'+arrayOfTeachers[counter_tmima_col]+'"';
-                if(j<(tmimata_arrayLength-1))timetable_row+=',';
-                counter_tmima_col++;
-            }
-           
-            counter_row_whole_table++;
-            timetable_row+='}';
-            if(!(daily_hour_counter==4 && i==5))timetable_row+=',';
-            timetable_json+=timetable_row;
-        } //end of for($daily_hour_counter=1
-         //timetable_row+=',';
-         counter_row_whole_table+=6;
-    }
-    timetable_json+=']';	
-    return timetable_json;
-}
-
 var cellEditSelectTeacherFunction=function(cell){
 
     //create a options list of all names currently in the table
@@ -312,12 +267,46 @@ $("#auto_assign_first_teachers").click(function(){
 
     //var arrayOfTeachers = $('#teacherslist').val().split('\n');
 
+    var auto_assined_teacher_table=
+    [
+    <?php
+    // NOTE PHP will show STATIC results (if you change text area it won't be valid -SHOULD convert this to javascript)
 
-    console.log(auto_assined_teacher_table());
+    $counter_row_whole_table=1;
+    $array_of_teachers_php=explode(PHP_EOL, $teacherlist_text);
+
+    // day 1
+    $days_array=["ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ"];
+    foreach($days_array as $this_day) {
+        /*
+        echo '{id:'.$counter_row_whole_table.',time:"'.$this_day.'"},'; 
+        $counter_row_whole_table++;
+        */
+        for($daily_hour_counter=1;$daily_hour_counter<5;$daily_hour_counter++){
+            $timetable_row= '{id:'.$counter_row_whole_table.',day:"'.$this_day.'",time:"'.$daily_hour_counter.'",';    
+            $counter_tmima_col=0;
+            foreach($tmimata_array as $tmima) {
+                $timetable_row.= 'tmimacode'.$counter_tmima_col.':"'.$array_of_teachers_php[$counter_tmima_col].'",';
+                $counter_tmima_col++;
+            }
+           
+            $counter_row_whole_table++;
+            $timetable_row.='},';
+            echo $timetable_row;
+        } //end of for($daily_hour_counter=1
+         $counter_row_whole_table+=6;
+    }
+
+    ?>    ]    
+
+    ;
+
+
+    //console.log(auto_assined_teacher_table);
     //var jsontext = '{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}';
     //var auto_assined_teacher_table = JSON.parse(jsontext);
     //$("#example-table").tabulator("updateOrAddData", [{id:1, name:"bob"}, {id:3, name:"steve"}]);
-    $("#example-table").tabulator("updateOrAddData",auto_assined_teacher_table()); //tabulator v3
+    $("#example-table").tabulator("updateOrAddData",auto_assined_teacher_table); //tabulator v3
 });
 
 var json_imported_data = [ 
@@ -360,7 +349,7 @@ $("#import_json").click(function(){
     $("#example-table").tabulator("setData",$('textarea#programdata').val()); //tabulator v3
 });
 
-// ##################   download TOTAL backup file +++++++++++++++
+// ##################   download file +++++++++++++++
 
 var textFile = null,
   makeTextFile = function (text) {
@@ -393,7 +382,7 @@ $("#btn-save-all-data").click(function () {
     var link = document.createElement('a');
     link.setAttribute('download', 'info.txt');
     //link.href = makeTextFile(textbox.value);
-    link.href = makeTextFile(get_teachers_textarea+'|||||'+get_tmimata_textarea+'|||||'+myJSON_mytabledata);
+    link.href = makeTextFile(get_teachers_textarea+get_tmimata_textarea+myJSON_mytabledata);
     document.body.appendChild(link);
 
     // wait for the link to be added to the document
