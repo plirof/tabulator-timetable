@@ -313,7 +313,7 @@ $("#auto_assign_first_teachers").click(function(){
     //var arrayOfTeachers = $('#teacherslist').val().split('\n');
 
 
-    //console.log(auto_assined_teacher_table());
+    console.log(auto_assined_teacher_table());
     //var jsontext = '{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}';
     //var auto_assined_teacher_table = JSON.parse(jsontext);
     //$("#example-table").tabulator("updateOrAddData", [{id:1, name:"bob"}, {id:3, name:"steve"}]);
@@ -409,31 +409,8 @@ $("#btn-save-all-data").click(function () {
 // ##################   download file -----------------
 
 
-//
-$("#count-teacher-hours").click(function(){
-
-
-	return countTeacherHours();
-
-
-});
-
 //Test button 
-$("#test-button").click(function(){
-	//var mytabledata_json =$("#example-table").tabulator("getData"); //tabulator v3
-	var result_obj=countTeacherHours();
-	for (var key in result_obj) {
-  		console.log("key " + key + " has value " + result_obj[key]);
-	}
-
-	console.log(result_obj);
-    return result_obj;
-
-});
-
-
-
-var countTeacherHours = function(){
+$("#count-teacher-hours").click(function(){
     //table.setData($('textarea#programdata').val()); //tabulator v4
     var mytabledata_json =$("#example-table").tabulator("getData"); //tabulator v3
     //console.log(mytabledata);
@@ -461,10 +438,8 @@ var countTeacherHours = function(){
 	  if (obj[json[i].tmimacode11]) {obj[json[i].tmimacode11]++;}else {obj[json[i].tmimacode11] = 1;}
 	  if (obj[json[i].tmimacode12]) {obj[json[i].tmimacode12]++;}else {obj[json[i].tmimacode12] = 1;}
 	  if (obj[json[i].tmimacode13]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode13] = 1;}
-	  if (obj[json[i].tmimacode14]) {obj[json[i].tmimacode14]++;}else {obj[json[i].tmimacode14] = 1;}
-	  if (obj[json[i].tmimacode15]) {obj[json[i].tmimacode15]++;}else {obj[json[i].tmimacode15] = 1;}
-	  if (obj[json[i].tmimacode16]) {obj[json[i].tmimacode16]++;}else {obj[json[i].tmimacode16] = 1;}
-	  if (obj[json[i].tmimacode17]) {obj[json[i].tmimacode17]++;}else {obj[json[i].tmimacode17] = 1;}	  	  	  
+	  if (obj[json[i].tmimacode14]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode14] = 1;}
+	  if (obj[json[i].tmimacode15]) {obj[json[i].tmimacode13]++;}else {obj[json[i].tmimacode15] = 1;}	  	  	  
 
          /* // this eval() crashes PC ...
 			arrayLength=1;
@@ -484,10 +459,9 @@ var countTeacherHours = function(){
 
 	console.log(obj);
     //console.log(Object.values(obj));
-    //console.log(Object.keys(obj));	
-	return (obj);
-};
+    //console.log(Object.keys(obj));
 
+});
 
 /*
 
