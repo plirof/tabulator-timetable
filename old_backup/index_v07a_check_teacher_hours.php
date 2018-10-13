@@ -173,8 +173,6 @@ function auto_assined_teacher_table(){
 var cellEditSelectTeacherFunction=function(cell){
 
     var count_teacher_hours_object=countTeacherHours();
-    var cellValue = cell.getValue();
-    //console.log(cell);
 
     //create a options list of all names currently in the table
     var arrayOfTeachers = $('#teacherslist').val().split('\n');
@@ -188,10 +186,9 @@ var cellEditSelectTeacherFunction=function(cell){
         var teacher_name=teacher_row_data[0];
         var teacher_max_hours=teacher_row_data[1];
 
-
         //console.log(teacher_row_data[0]);
         //console.log(count_teacher_hours_object[teacher_name]);
-        if(count_teacher_hours_object[teacher_name]>=teacher_max_hours && cellValue!=teacher_name) return; //skip this iteration if teacher exceededhis hours
+        if(count_teacher_hours_object[teacher_name]>=teacher_max_hours) return; //skip this iteration if teacher exceededhis hours
         //arrayOfTeachers2[data] = data;
         arrayOfTeachers2[teacher_name] = teacher_name;
     });
