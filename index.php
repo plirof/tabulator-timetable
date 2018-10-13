@@ -63,7 +63,7 @@ $tmimata_array = explode(',',$tmimatalist_text);
 <button id="download-xlsx">download-xlsx</button>
 <button id="import_json">import_json</button>
 <button id="auto_assign_first_teachers">auto_assign_main_teachers</button>
-<button id="btn-save-all-data">Save ALL data</button>
+<button id="btn-save-all-data">EXPORT ALL data</button>
 <button id="count-teacher-hours">count-teacher-hours</button>
 <button id="test-button">TEsT stuff button</button>
 <div id="example-table"></div>
@@ -145,7 +145,7 @@ function auto_assined_teacher_table(){
         */
         //put teachers to first 4 hours
         for(var daily_hour_counter=1;daily_hour_counter<5;daily_hour_counter++){
-            timetable_row= '{"id":'+counter_row_whole_table+',"day":"'+days_array[i]+'","time":"'+daily_hour_counter+'",';    
+            timetable_row= '{"id":'+counter_row_whole_table+',"day":"'+days_array[i-1]+'","time":"'+daily_hour_counter+'",';    
             counter_tmima_col=0;
             //foreach(tmimata_array as $tmima) {
             for( var j=0;j<tmimata_arrayLength;j++) {	
@@ -162,7 +162,8 @@ function auto_assined_teacher_table(){
          //timetable_row+=',';
          counter_row_whole_table+=6;
     }
-    timetable_json+=']';	
+    timetable_json+=']';
+    //console.log(timetable_json)	;
     return timetable_json;
 }
 
@@ -438,6 +439,8 @@ $("#count-teacher-hours").click(function(){
 
 //Test button 
 $("#test-button").click(function(){
+    var get_mytabledata =$("#example-table").tabulator("getData");
+    console.log(get_mytabledata);
 	//var mytabledata_json =$("#example-table").tabulator("getData"); //tabulator v3
 	var result_obj=countTeacherHours();
 	for (var key in result_obj) {
