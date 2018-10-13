@@ -169,10 +169,9 @@ function auto_assined_teacher_table(){
 
 var cellEditSelectTeacherFunction=function(cell){
 
-    var count_teacher_hours_object=countTeacherHours();
-
     //create a options list of all names currently in the table
     var arrayOfTeachers = $('#teacherslist').val().split('\n');
+
     var arrayOfTeachers2 = {};
 
     arrayOfTeachers.forEach(function(row){
@@ -186,7 +185,7 @@ var cellEditSelectTeacherFunction=function(cell){
         console.log(teacher_row_data[0]);
         
         //arrayOfTeachers2[data] = data;
-        arrayOfTeachers2[teacher_name] = teacher_name;
+        arrayOfTeachers2[data] = teacher_name;
     });
     return arrayOfTeachers2;
     
