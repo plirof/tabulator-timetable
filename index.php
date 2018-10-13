@@ -183,8 +183,9 @@ var cellEditSelectTeacherFunction=function(cell){
         var teacher_name=teacher_row_data[0];
         var teacher_max_hours=teacher_row_data[1];
 
-        console.log(teacher_row_data[0]);
-        
+        //console.log(teacher_row_data[0]);
+        //console.log(count_teacher_hours_object[teacher_name]);
+        if(count_teacher_hours_object[teacher_name]>=teacher_max_hours) return; //skip this iteration if teacher exceededhis hours
         //arrayOfTeachers2[data] = data;
         arrayOfTeachers2[teacher_name] = teacher_name;
     });
