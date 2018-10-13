@@ -194,7 +194,7 @@ var cellEditSelectTeacherFunction=function(cell){
     */
 }; // end of var cellEditSelectTeacherFunction
 
-//alert ("<?php echo $program_data;?>");
+/* alert ("<?php echo $program_data;?>"); */
 var tableData = 
 	
     <?php
@@ -292,7 +292,7 @@ $("#example-table").tabulator( {     //tabulator v3
     },    
 }); // END Of tabulator Init
 
-//if(posted_data /*&& (typeof program_data !== 'undefined') */) $("#example-table").tabulator("setData","<?php print_r($program_data); echo $program_data; ?>"); //tabulator v3
+/* if(posted_data && (typeof program_data !== 'undefined') ) $("#example-table").tabulator("setData","<?php print_r($program_data); echo $program_data; ?>"); //tabulator v3  */
 
 //trigger download of data.json file
 $("#download-json").click(function(){
