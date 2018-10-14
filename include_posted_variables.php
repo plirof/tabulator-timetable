@@ -15,18 +15,18 @@ if(@($_POST['timetable_restorebackup'] )) {
 
 if(@($_POST['timetable_teacher'] )) {
     $teacherlist_text=$_POST['timetable_teacher'];
-    $posted_data=true;
+    $posted_data_teacher=true;
 }
 
 if(@($_POST['timetable_tmimata'] )) {
     $tmimatalist_text=$_POST['timetable_tmimata'];
-    $posted_data=true;
+    $posted_data_tmima=true;
 }
 
 //$program_data="";  //not impemented yet
 if(@($_POST['timetable_program'] )) {
     $program_data=$_POST['timetable_program'];
-    $posted_data=true;
+    $posted_data_program_only=true;
 }
 
 ?>
