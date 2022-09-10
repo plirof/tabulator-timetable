@@ -61,9 +61,10 @@ $tmimata_array = explode(',',$tmimatalist_text);
 <body>
 
 <table><tr><td>
+<form method="post" >	
     ΕΚΠΑΙΔΕΥΤΙΚΟΙ (Ένας σε κάθε σειρά):<BR> <textarea id="teacherslist" name='timetable_teacher' cols=50 rows=10 ><?php echo $teacherlist_text; ?></textarea><BR><BR><BR><BR>
     </td><td>
-<form method="post" >    	
+    	
     TMHMATA (χωρισμένα με κόμμα):<BR><textarea id="tmimatalist" name='timetable_tmimata' cols=50 rows=10 ><?php echo $tmimatalist_text; ?></textarea>
 <input type=submit value="ΚΑΤΑΧΩΡΗΣΗ ΤΜΗΜΑΤΩΝ"> (ΠΡΟΣΟΧΗ!!! Θα διαγραφεί το πρόγραμμα)
 </form>    
